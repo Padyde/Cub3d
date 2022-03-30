@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:21:48 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 14:46:29 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/03/30 15:32:33 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,22 @@ int	ft_exit(t_datas_global *all_datas)
 	return (0);
 }
 
+void	*malloc_test(void *all, int nb, t_datas_global *all_datas)
+{
+	all = malloc(nb);
+	if (!all)
+		ft_print_error(ERROR_MALLOC, all_datas);
+	return (all);
+}
+
 void	malloc_all(t_datas_global *all_datas)
 {
-	all_datas->map_datas = malloc(sizeof(t_datas_map));
-	if (!all_datas->map_datas)
-		ft_print_error(ERROR_MALLOC, all_datas);
-	all_datas->player_datas = malloc(sizeof(t_datas_player));
-	if (!all_datas->player_datas)
-		ft_print_error(ERROR_MALLOC, all_datas);
-	all_datas->map_datas->north_wall = malloc(sizeof(t_datas_wall));
-	if (!all_datas->map_datas->north_wall)
-		ft_print_error(ERROR_MALLOC, all_datas);
-	all_datas->map_datas->south_wall = malloc(sizeof(t_datas_wall));
-	if (!all_datas->map_datas->south_wall)
-		ft_print_error(ERROR_MALLOC, all_datas);
-	all_datas->map_datas->east_wall = malloc(sizeof(t_datas_wall));
-	if (!all_datas->map_datas->east_wall)
-		ft_print_error(ERROR_MALLOC, all_datas);
-	all_datas->map_datas->west_wall = malloc(sizeof(t_datas_wall));
-	if (!all_datas->map_datas->west_wall)
-		ft_print_error(ERROR_MALLOC, all_datas);
+	all_datas->map_datas = (t_datas_map *)malloc_test(all_datas->map_datas, sizeof(t_datas_map), all_datas);
+	all_datas->player_datas = (t_datas_player *)malloc_test(all_datas->player_datas, sizeof(t_datas_player), all_datas);
+	all_datas->map_datas->north_wall = (t_datas_wall *)malloc_test(all_datas->map_datas->north_wall, sizeof(t_datas_wall), all_datas);
+	all_datas->map_datas->south_wall = (t_datas_wall *)malloc_test(all_datas->map_datas->south_wall, sizeof(t_datas_wall), all_datas);
+	all_datas->map_datas->east_wall = (t_datas_wall *)malloc_test(all_datas->map_datas->east_wall, sizeof(t_datas_wall), all_datas);
+	all_datas->map_datas->west_wall = (t_datas_wall *)malloc_test(all_datas->map_datas->west_wall, sizeof(t_datas_wall), all_datas);
 	all_datas->map_datas->sky = -1;
 	all_datas->map_datas->floor = -1;
 	all_datas->map_datas->south_wall->ptr = NULL;
