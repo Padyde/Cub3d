@@ -8,6 +8,9 @@ all:  global_libft_init creat_dir print ${NAME}
 
 -include datas_makefile/manip_global_lib.mk
 
+#@gcc ${CFLAGS} -I ${INCLUDES} -L ./mlx/ -lmlx -framework OpenGL -framework AppKit -lz ${LIBFT} ${OBJS} -o $@
+
+
 ${NAME}:    ${OBJS}
 	@gcc ${CFLAGS} -I ${INCLUDES} -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit ${LIBFT} ${OBJS} -o $@
 	@printf "${START_FIRST}${BLUE}%-30s${DEFAULT}\t\t[${GREEN} OK ${DEFAULT}]%40s\n" "Compile" ""

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/30 11:25:42 by hugoorickx        #+#    #+#             */
+/*   Updated: 2022/03/30 11:27:31 by hugoorickx       ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "all.h"
 
 char	*ft_strjoin(char *line, char buf)
@@ -13,10 +25,10 @@ char	*ft_strjoin(char *line, char buf)
 	new = malloc(i + 2);
 	i = 0;
 	while (line && line[i])
-    {
+	{
 		new[i] = line[i];
-        i++;
-    }
+		i++;
+	}
 	new[i++] = buf;
 	new[i] = '\0';
 	if (line)
