@@ -6,16 +6,16 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:21:48 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 14:05:41 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/03/30 14:46:29 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-int	free_all(t_datas_global *all_datas)
+void	free_all(t_datas_global *all_datas)
 {
 	if (!all_datas)
-		return (0);
+		return ;
 	if (all_datas->player_datas)
 		free(all_datas->player_datas);
 	if (all_datas->map_datas->east_wall)
@@ -34,8 +34,17 @@ int	free_all(t_datas_global *all_datas)
 		free(all_datas->tmp);
 	if (all_datas->tmp1)
 		ft_free_mat(all_datas->tmp1);
-	if (all_datas->win_ptr)
+}
+
+int	ft_exit(t_datas_global *all_datas)
+{
+	free_all(all_datas);
+	if (all_datas->mlx_ptr)
+	{
 		mlx_destroy_window(all_datas->mlx_ptr, all_datas->win_ptr);
+		write(1, MESSAGE_END_EXIT, ft_strlen(MESSAGE_END_EXIT));
+		exit (0);
+	}
 	return (0);
 }
 
@@ -118,6 +127,6 @@ int	main(int argc, char **argv)
 		ft_print_error(ERROR_WRONG_POS, &all_datas);
 	print_all(&all_datas);
 	mlx_key_hook(all_datas.win_ptr, ft_key_hook, &all_datas);
-	mlx_hook(all_datas.win_ptr, WINDOW_PRESS_EXIT, 0, free_all, &all_datas);
+	mlx_hook(all_datas.win_ptr, WINDOW_PRESS_EXIT, 0, ft_exit, &all_datas);
 	mlx_loop(all_datas.mlx_ptr);
 }

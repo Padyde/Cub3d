@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 13:14:15 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 14:03:03 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/03/30 14:46:48 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ struct s_datas_global
 
 void	copy_the_other(char *params, int *val, t_datas_global *all_datas);
 void	convert_datas(int fd, t_datas_global *datas_map);
-int		free_all(t_datas_global *all_datas);
+void	free_all(t_datas_global *all_datas);
 void	malloc_all(t_datas_global *all_datas);
 void	convert_map(char *new_line, t_datas_global *datas_map);
 void	ft_print_error(char *output, t_datas_global *all_datas);

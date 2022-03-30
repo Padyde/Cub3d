@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:34:20 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 14:01:00 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/03/30 14:43:45 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define ERROR_RBG_MAX_INT "Error: rgb can't be bigger than max int\n"
 # define ERROR_RBG_NEG "Error: rgb can't be negative\n"
 # define ERROR_RGB_255 "Error: rgb can't be bigger than 255\n"
-# define ERROR_RGB_MIN_INT "Error: rgb can't be bigger than min int\n"
+# define ERROR_RGB_MIN_INT "Error: rgb can't be smaller than min int\n"
 # define ERROR_MORE_PLAYER "Error: Two players or more in map\n"
 # define ERROR_NO_PLAYER "Error: No player in map\n"
 # define ERROR_VOID_LINE "Error: Void line in map\n"
@@ -37,6 +37,7 @@
 # define ERROR_WRONG_TYPE_IMG "Error: Wrong type for image\n"
 # define ERROR_IMG_NOT_EXIST "Error: image doesn't exist\n"
 # define MESSAGE_END_EXIT "Thanks for playing\n"
+
 # define W 13
 # define Q 12
 # define ESC 53
