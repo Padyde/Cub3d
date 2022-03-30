@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:22:05 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 11:22:06 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/03/30 13:51:45 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	check_num(char *string, t_datas_global *all_datas)
 	int	output;
 
 	output = ft_atoi(string);
-	if (output == -1 && ft_strlen(string) > 2)
+	if (ft_strlen(string) == 1 && (string[0] == '-' || string[0] == '+'))
+		ft_print_error(ERROR_WRONG_VALUE, all_datas);
+	else if (output == -1 && ft_strlen(string) > 2)
 		ft_print_error(ERROR_RBG_MAX_INT, all_datas);
 	else if (output < 0)
 		ft_print_error(ERROR_RBG_NEG, all_datas);

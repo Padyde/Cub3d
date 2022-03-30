@@ -6,13 +6,14 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:34:20 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 11:34:21 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/03/30 13:51:41 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_H
 # define DEFINE_H
 
+# define ERROR_WRONG_VALUE "Error: Wrong value\n"
 # define ERROR_MALLOC "Error: Malloc doesn't work\n"
 # define ERROR_NOT_MAP "Error: Not map in file\n"
 # define ERROR_WRONG_CHAR "Error: Wrong char in map\n"
