@@ -6,16 +6,16 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:21:48 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 11:21:49 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/03/30 14:05:41 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-void	free_all(t_datas_global *all_datas)
+int	free_all(t_datas_global *all_datas)
 {
 	if (!all_datas)
-		return ;
+		return (0);
 	if (all_datas->player_datas)
 		free(all_datas->player_datas);
 	if (all_datas->map_datas->east_wall)
@@ -34,6 +34,9 @@ void	free_all(t_datas_global *all_datas)
 		free(all_datas->tmp);
 	if (all_datas->tmp1)
 		ft_free_mat(all_datas->tmp1);
+	if (all_datas->win_ptr)
+		mlx_destroy_window(all_datas->mlx_ptr, all_datas->win_ptr);
+	return (0);
 }
 
 void	malloc_all(t_datas_global *all_datas)
@@ -80,13 +83,20 @@ void	print_all(t_datas_global *all_datas)
 	printf("South		-> %d\n", all_datas->map_datas->south_wall->size_x);
 	printf("West		 -> %d\n", all_datas->map_datas->west_wall->size_x);
 	printf("Floor		-> %d\n", all_datas->map_datas->floor);
-	printf("Sky		  -> %d\n", all_datas->map_datas->sky);
+	printf("Sky 		-> %d\n", all_datas->map_datas->sky);
 	printf("Player x	 -> %f\n", all_datas->player_datas->x);
 	printf("Player x	 -> %f\n", all_datas->player_datas->y);
 	printf("Player View  -> %d\n", all_datas->player_datas->start);
 	printf("Map:\n");
 	while (++x < ft_matrixlen(all_datas->map_datas->map))
 		printf("%s\n", all_datas->map_datas->map[x]);
+}
+
+int	ft_key_hook(int keycode, t_datas_global *all_datas)
+{
+	if (keycode == ESC)
+		ft_print_error(MESSAGE_END_EXIT, all_datas);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -107,5 +117,7 @@ int	main(int argc, char **argv)
 	else if (tmp == -2)
 		ft_print_error(ERROR_WRONG_POS, &all_datas);
 	print_all(&all_datas);
-	free_all(&all_datas);
+	mlx_key_hook(all_datas.win_ptr, ft_key_hook, &all_datas);
+	mlx_hook(all_datas.win_ptr, WINDOW_PRESS_EXIT, 0, free_all, &all_datas);
+	mlx_loop(all_datas.mlx_ptr);
 }

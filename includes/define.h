@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:34:20 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 13:51:41 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/03/30 14:01:00 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,17 @@
 # define ERROR_TOO_MANY_IMG "Error: Two images for a wall\n"
 # define ERROR_WRONG_TYPE_IMG "Error: Wrong type for image\n"
 # define ERROR_IMG_NOT_EXIST "Error: image doesn't exist\n"
+# define MESSAGE_END_EXIT "Thanks for playing\n"
+# define W 13
+# define Q 12
+# define ESC 53
+# define D 2
+# define A 0
+# define S 1
+# define WINDOW_PRESS_EXIT 17
+# define LEFT_ARROW 123
+# define RIGHT_ARROW 124
+# define DOWN_ARROW 125
+# define UP_ARROW 126
 
 #endif

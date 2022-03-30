@@ -6,7 +6,7 @@
 #    By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/30 11:47:38 by hugoorickx        #+#    #+#              #
-#    Updated: 2022/03/30 11:51:19 by hugoorickx       ###   ########.fr        #
+#    Updated: 2022/03/30 14:07:52 by hugoorickx       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,8 @@ re: re_libft print fclean  all
 
 run: ${NAME}
 	@./${NAME}
+
+fclean_all: fclean fclean_libft
 
 print:
 	@printf "\n\t${BLUE_UNDERLINE}${NAME} :${DEFAULT}\n\n"
