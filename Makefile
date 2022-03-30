@@ -1,5 +1,16 @@
--include datas_makefile/colors.mk
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/03/30 11:47:38 by hugoorickx        #+#    #+#              #
+#    Updated: 2022/03/30 11:51:19 by hugoorickx       ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
+-include datas_makefile/colors.mk
 -include datas_makefile/srcs.mk
 
 CFLAGS		=	-Wall -Wextra -Werror
@@ -8,10 +19,9 @@ all:  global_libft_init creat_dir print ${NAME}
 
 -include datas_makefile/manip_global_lib.mk
 
-#@gcc ${CFLAGS} -I ${INCLUDES} -L ./mlx/ -lmlx -framework OpenGL -framework AppKit -lz ${LIBFT} ${OBJS} -o $@
+#@gcc ${CFLAGS} -I ${INCLUDES} -lmlx -framework OpenGL -framework AppKit -lz ${LIBFT} ${OBJS} -o $@
 
-
-${NAME}:    ${OBJS}
+${NAME}:	${OBJS}
 	@gcc ${CFLAGS} -I ${INCLUDES} -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit ${LIBFT} ${OBJS} -o $@
 	@printf "${START_FIRST}${BLUE}%-30s${DEFAULT}\t\t[${GREEN} OK ${DEFAULT}]%40s\n" "Compile" ""
 
