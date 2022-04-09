@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:22:03 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 11:22:03 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/08 13:49:47 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,19 @@ void	convert_map(char *new_line, t_datas_global *all_datas)
 {
 	char	**tmp;
 
-	tmp = ft_matrixlcpy(all_datas->map_datas->map, ft_matrixlen(all_datas->map_datas->map));
+	tmp = ft_matrixlcpy(all_datas->map_datas->map, \
+		ft_matrixlen(all_datas->map_datas->map));
 	if (!tmp)
 		ft_print_error(ERROR_MALLOC, all_datas);
-	tmp[ft_matrixlen(all_datas->map_datas->map)] = malloc(sizeof(char) * ft_strlen(new_line));
+	tmp[ft_matrixlen(all_datas->map_datas->map)] = \
+		malloc(sizeof(char) * ft_strlen(new_line));
 	if (!tmp[ft_matrixlen(all_datas->map_datas->map)])
 	{
 		ft_free_mat(tmp);
 		ft_print_error(ERROR_MALLOC, all_datas);
 	}
-	ft_strlcpy(tmp[ft_matrixlen(all_datas->map_datas->map)], new_line, ft_strlen(new_line) + 1);
+	ft_strlcpy(tmp[ft_matrixlen(all_datas->map_datas->map)], new_line, \
+		ft_strlen(new_line) + 1);
 	tmp[ft_matrixlen(all_datas->map_datas->map) + 1] = NULL;
 	if (all_datas->map_datas->map)
 		ft_free_mat(all_datas->map_datas->map);

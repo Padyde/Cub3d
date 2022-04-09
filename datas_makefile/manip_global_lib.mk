@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    manip_global_lib.mk                                :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/04/08 13:03:00 by hugoorickx        #+#    #+#              #
+#    Updated: 2022/04/08 13:03:00 by hugoorickx       ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 global_libft_init:
 	@if [ ! -e "./lib/bin/libft.a" ]; then \
 		printf "\n\t${BLUE_UNDERLINE}Libft :${DEFAULT}\n\n"; \

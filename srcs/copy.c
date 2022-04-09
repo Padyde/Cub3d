@@ -6,25 +6,30 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:22:00 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 11:22:01 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/08 13:51:41 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-void	copy_the_wall(t_datas_global *all_datas, char *to_copy, t_datas_wall *wall)
+void	copy_the_wall(t_datas_global *all_datas, char *cp, t_datas_wall *wall)
 {
 	int	fd;
 
 	if (wall->ptr)
 		ft_print_error(ERROR_TOO_MANY_IMG, all_datas);
-	if (ft_strlen(to_copy) <= 4 || to_copy[ft_strlen(to_copy) - 1] != 'M' || to_copy[ft_strlen(to_copy) - 2] != 'P' || to_copy[ft_strlen(to_copy) - 3] != 'X' || to_copy[ft_strlen(to_copy) - 4] != '.')
+	if (ft_strlen(cp) <= 4 || cp[ft_strlen(cp) - 1] != 'M'
+		|| cp[ft_strlen(cp) - 2] != 'P' || cp[ft_strlen(cp) - 3] != 'X'
+		|| cp[ft_strlen(cp) - 4] != '.')
 		ft_print_error(ERROR_WRONG_TYPE_IMG, all_datas);
-	fd = open (to_copy, O_RDONLY);
+	fd = open (cp, O_RDONLY);
 	if (fd <= 0)
 		ft_print_error(ERROR_IMG_NOT_EXIST, all_datas);
 	close(fd);
-	wall->ptr = mlx_xpm_file_to_image(all_datas->mlx_ptr, to_copy, &wall->size_x, &wall->size_y);
+	wall->ptr = mlx_xpm_file_to_image(all_datas->mlx_ptr, cp, \
+		&wall->size_x, &wall->size_y);
+	wall->addr = mlx_get_data_addr(wall->ptr, &wall->bpp, \
+		&wall->size_line, &wall->endian);
 }
 
 void	copy_the_other(char *params, int *val, t_datas_global *all_datas)

@@ -20,8 +20,8 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <mlx.h>
+# include <math.h>
+# include <limits.h>
 # include "define.h"
-
-//# include "../wraloc/wraloc.h"
 
 #endif

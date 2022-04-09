@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:22:05 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 14:32:27 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/08 14:11:15 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,12 @@ int	check_char(char x)
 		&& x != 'N' && x != 'S' && x != 'E' && x != 'W');
 }
 
-int	check_map(t_datas_global *all_datas)
+int	check_begin(char **map)
 {
 	int		x;
 	int		y;
-	char	**map;
 
 	y = -1;
-	map = all_datas->map_datas->map;
 	while (++y < ft_matrixlen(map))
 	{
 		x = -1;
@@ -51,35 +49,60 @@ int	check_map(t_datas_global *all_datas)
 			if (check_char(map[y][x]))
 				return (-1);
 	}
+	return (0);
+}
+
+int	check_while(char **map, int x, int y, t_datas_global *all_datas)
+{
+	if ((x == 0 || y == 0 || x + 1 == ft_strlen(map[y])
+			|| x >= ft_strlen(map[y + 1]) || x >= ft_strlen(map[y - 1])
+			|| y + 1 == ft_matrixlen(map)) || check_char(map[y][x + 1])
+		|| check_char(map[y][x - 1]) || check_char(map[y + 1][x])
+		|| check_char(map[y - 1][x]))
+		return (-2);
+	if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E'
+		|| map[y][x] == 'W')
+	{
+		if (all_datas->player_datas->dir_x > -2)
+			ft_print_error(ERROR_MORE_PLAYER, all_datas);
+		all_datas->player_datas->x = (float)x;
+		all_datas->player_datas->y = (float)y;
+		if (map[y][x] == 'N')
+			def_dirs(all_datas->player_datas, 0, -1, 1);
+		if (map[y][x] == 'E')
+			def_dirs(all_datas->player_datas, 1, 0, 0);
+		if (map[y][x] == 'S')
+			def_dirs(all_datas->player_datas, 0, 1, -1);
+		if (map[y][x] == 'W')
+			def_dirs(all_datas->player_datas, -1, 0, 0);
+		map[y][x] = '0';
+	}
+	return (0);
+}
+
+int	check_map(t_datas_global *all_datas)
+{
+	int		x;
+	int		y;
+	char	**map;
+	char	tmp;
+
+	map = all_datas->map_datas->map;
+	if (check_begin(map) == -1)
+		return (-1);
 	y = -1;
 	while (++y < ft_matrixlen(map))
 	{
 		x = -1;
 		while (x++ < ft_strlen(map[y]))
 		{
-			if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'W')
-			{
-				if ((x == 0 || y == 0 || x + 1 == ft_strlen(map[y]) || x >= ft_strlen(map[y + 1]) || x >= ft_strlen(map[y - 1]) || y + 1 == ft_matrixlen(map)) || check_char(map[y][x + 1]) || check_char(map[y][x - 1]) || check_char(map[y + 1][x]) || check_char(map[y - 1][x]))
+			tmp = map[y][x];
+			if (tmp == 48 || tmp == 78 || tmp == 83 || tmp == 69 || tmp == 87)
+				if (check_while(map, x, y, all_datas) == -2)
 					return (-2);
-				if (map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'E' || map[y][x] == 'W')
-				{
-					if (all_datas->player_datas->start > -1)
-						ft_print_error(ERROR_MORE_PLAYER, all_datas);
-					all_datas->player_datas->x = (float)x;
-					all_datas->player_datas->y = (float)y;
-					if (map[y][x] == 'N')
-						all_datas->player_datas->start = 1;
-					if (map[y][x] == 'E')
-						all_datas->player_datas->start = 2;
-					if (map[y][x] == 'S')
-						all_datas->player_datas->start = 3;
-					if (map[y][x] == 'W')
-						all_datas->player_datas->start = 4;
-				}
-			}
 		}
 	}
-	if (all_datas->player_datas->start == -1)
+	if (all_datas->player_datas->dir_x == -2)
 		ft_print_error(ERROR_NO_PLAYER, all_datas);
 	return (1);
 }

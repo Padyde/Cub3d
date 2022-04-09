@@ -6,35 +6,11 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:21:48 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 15:32:33 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/08 14:47:33 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
-
-void	free_all(t_datas_global *all_datas)
-{
-	if (!all_datas)
-		return ;
-	if (all_datas->player_datas)
-		free(all_datas->player_datas);
-	if (all_datas->map_datas->east_wall)
-		free(all_datas->map_datas->east_wall);
-	if (all_datas->map_datas->north_wall)
-		free(all_datas->map_datas->north_wall);
-	if (all_datas->map_datas->west_wall)
-		free(all_datas->map_datas->west_wall);
-	if (all_datas->map_datas->south_wall)
-		free(all_datas->map_datas->south_wall);
-	if (all_datas->map_datas->map)
-		ft_free_mat(all_datas->map_datas->map);
-	if (all_datas->map_datas)
-		free(all_datas->map_datas);
-	if (all_datas->tmp)
-		free(all_datas->tmp);
-	if (all_datas->tmp1)
-		ft_free_mat(all_datas->tmp1);
-}
 
 int	ft_exit(t_datas_global *all_datas)
 {
@@ -48,35 +24,30 @@ int	ft_exit(t_datas_global *all_datas)
 	return (0);
 }
 
-void	*malloc_test(void *all, int nb, t_datas_global *all_datas)
-{
-	all = malloc(nb);
-	if (!all)
-		ft_print_error(ERROR_MALLOC, all_datas);
-	return (all);
-}
+/*
+all_datas->player_datas->pl_delta_x = cos(all_datas->player_datas->pl_angle);
+all_datas->player_datas->pl_delta_y = sin(all_datas->player_datas->pl_angle);
 
-void	malloc_all(t_datas_global *all_datas)
-{
-	all_datas->map_datas = (t_datas_map *)malloc_test(all_datas->map_datas, sizeof(t_datas_map), all_datas);
-	all_datas->player_datas = (t_datas_player *)malloc_test(all_datas->player_datas, sizeof(t_datas_player), all_datas);
-	all_datas->map_datas->north_wall = (t_datas_wall *)malloc_test(all_datas->map_datas->north_wall, sizeof(t_datas_wall), all_datas);
-	all_datas->map_datas->south_wall = (t_datas_wall *)malloc_test(all_datas->map_datas->south_wall, sizeof(t_datas_wall), all_datas);
-	all_datas->map_datas->east_wall = (t_datas_wall *)malloc_test(all_datas->map_datas->east_wall, sizeof(t_datas_wall), all_datas);
-	all_datas->map_datas->west_wall = (t_datas_wall *)malloc_test(all_datas->map_datas->west_wall, sizeof(t_datas_wall), all_datas);
-	all_datas->map_datas->sky = -1;
-	all_datas->map_datas->floor = -1;
-	all_datas->map_datas->south_wall->ptr = NULL;
-	all_datas->map_datas->east_wall->ptr = NULL;
-	all_datas->map_datas->north_wall->ptr = NULL;
-	all_datas->map_datas->west_wall->ptr = NULL;
-	all_datas->tmp = NULL;
-	all_datas->tmp1 = NULL;
-	all_datas->map_datas->map = NULL;
-	all_datas->player_datas->start = -1;
-	all_datas->mlx_ptr = mlx_init();
-	all_datas->win_ptr = mlx_new_window(all_datas->mlx_ptr, 800, 600, "cub3d");
-}
+all_datas->player_datas->pl_angle = 3*PI/2; haut
+all_datas->player_datas->pl_angle = PI/2; bas
+all_datas->player_datas->pl_angle = PI*2; droite
+all_datas->player_datas->pl_angle = PI; gauche
+pour le nord
+float	dir_x = 0;
+float	dir_y = -1;
+
+sud
+float	dir_x = 0;
+float	dir_y = 1;
+
+ouest
+float	dir_x = -1;
+float	dir_y = 0;
+
+est
+float	dir_x = 1;
+float	dir_y = 0;
+*/
 
 void	print_all(t_datas_global *all_datas)
 {
@@ -91,17 +62,10 @@ void	print_all(t_datas_global *all_datas)
 	printf("Sky 		-> %d\n", all_datas->map_datas->sky);
 	printf("Player x	 -> %f\n", all_datas->player_datas->x);
 	printf("Player x	 -> %f\n", all_datas->player_datas->y);
-	printf("Player View  -> %d\n", all_datas->player_datas->start);
+	printf("Player View  -> %f\n", all_datas->player_datas->dir_x);
 	printf("Map:\n");
 	while (++x < ft_matrixlen(all_datas->map_datas->map))
 		printf("%s\n", all_datas->map_datas->map[x]);
-}
-
-int	ft_key_hook(int keycode, t_datas_global *all_datas)
-{
-	if (keycode == ESC)
-		ft_print_error(MESSAGE_END_EXIT, all_datas);
-	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -122,7 +86,8 @@ int	main(int argc, char **argv)
 	else if (tmp == -2)
 		ft_print_error(ERROR_WRONG_POS, &all_datas);
 	print_all(&all_datas);
-	mlx_key_hook(all_datas.win_ptr, ft_key_hook, &all_datas);
+	mlx_hook(all_datas.win_ptr, 2, 0, ft_key_hook, &all_datas);
 	mlx_hook(all_datas.win_ptr, WINDOW_PRESS_EXIT, 0, ft_exit, &all_datas);
+	create_wall(&all_datas);
 	mlx_loop(all_datas.mlx_ptr);
 }

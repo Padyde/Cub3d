@@ -4,7 +4,7 @@ WE ./walls/corner_down_left.XPM
 EA ./walls/corner_down_left.XPM
    
 F 1,2,255
-C 1,2,2
+C 20,110,201
 
         1111111111111111111111111
         1000000000110000000000001
