@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:31:08 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/03/30 11:38:38 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/11 00:45:59 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 # define ALL_INC_H
 
 # include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <mlx.h>
 # include <math.h>
-# include <limits.h>
 # include "define.h"
 
 #endif

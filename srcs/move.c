@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
+/*   By: hugogoorickx <hugogoorickx@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 13:40:05 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/04/08 13:46:44 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/09 23:26:08 by hugogoorick      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-void	go(t_datas_player *val1, double val2, char **map, t_datas_global *data)
+void	go(t_datas_player *val1, double val2, char **map)
 {
 	int	x;
 	int	y;
@@ -25,10 +25,9 @@ void	go(t_datas_player *val1, double val2, char **map, t_datas_global *data)
 	y = val1->y + val1->dir_y * val2;
 	if (map[y][x] != '1')
 		val1->y += val1->dir_y * val2;
-	create_wall(data);
 }
 
-void	back(t_datas_player *v1, double v2, char **map, t_datas_global *data)
+void	back(t_datas_player *v1, double v2, char **map)
 {
 	int	x;
 	int	y;
@@ -41,7 +40,6 @@ void	back(t_datas_player *v1, double v2, char **map, t_datas_global *data)
 	y = v1->y - v1->dir_y * v2;
 	if (map[y][x] != '1')
 		v1->y -= v1->dir_y * v2;
-	create_wall(data);
 }
 
 void	rotate(t_datas_player *val1, double val2, t_datas_global *data)
@@ -54,7 +52,6 @@ void	rotate(t_datas_player *val1, double val2, t_datas_global *data)
 	old_x = val1->plane_x;
 	val1->plane_x = dpx(data->player_datas, val2, 0);
 	val1->plane_y = dpy(val1, val2, 0, old_x);
-	create_wall(data);
 }
 
 void	lat_right(t_datas_player *v1, double v2, t_datas_global *data)
@@ -70,7 +67,6 @@ void	lat_right(t_datas_player *v1, double v2, t_datas_global *data)
 	y = v1->y + v1->plane_y * v2;
 	if (data->map_datas->map[y][x] != '1')
 		v1->y += v1->plane_y * v2;
-	create_wall(data);
 }
 
 void	lat_left(t_datas_player *v1, double v2, t_datas_global *data)
@@ -86,5 +82,4 @@ void	lat_left(t_datas_player *v1, double v2, t_datas_global *data)
 	y = v1->y - v1->plane_y * v2;
 	if (data->map_datas->map[y][x] != '1')
 		v1->y -= v1->plane_y * v2;
-	create_wall(data);
 }

@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:34:20 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/04/08 13:53:41 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/10 23:42:08 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,8 @@
 # define DOWN_ARROW 125
 # define UP_ARROW 126
 
-# define SCREEN_WIGHT 2500
-# define SCREEN_HEIGHT 1250
-
-// # define SCREEN_WIGHT 640
-// # define SCREEN_HEIGHT 480
+# define SCREEN_WIGHT 1000
+# define SCREEN_HEIGHT 500
 
 # define PI 3.14159265359
 

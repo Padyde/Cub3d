@@ -6,7 +6,7 @@
 #    By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/08 13:03:06 by hugoorickx        #+#    #+#              #
-#    Updated: 2022/04/08 13:03:06 by hugoorickx       ###   ########.fr        #
+#    Updated: 2022/04/11 00:48:16 by hugoorickx       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,20 +31,29 @@ SRC_DIR		=	./srcs
 # *** #
 
 OBJS	= 	$(addprefix ${OBJ_DIR}/,${SRC:.c=.o})
+OBJS_MAIN	= 	$(addprefix ${OBJ_DIR}/,${MAIN:.c=.o})
+OBJS_BONUS	= 	$(addprefix ${OBJ_DIR}/,${BONUS:.c=.o})
 
 # *** #
 # SRC #
 # *** #
 
+MAIN += main.c
+MAIN += ray_cast.c
+MAIN += ray_cast_utils.c
+
+BONUS += key_hook_bonus.c
+BONUS += main_bonus.c
+BONUS += ray_cast_bonus.c
+BONUS += ray_cast_utils_bonus.c
+
 SRC += ft_print_error.c
+SRC += free_all.c
 SRC += check.c
 SRC += convert.c
 SRC += copy.c
 SRC += first_tests.c
 SRC += give_me_wall.c
-SRC += main.c
-SRC += ray_cast.c
-SRC += ray_cast_utils.c
 SRC += math_fcts.c
 SRC += move.c
 SRC += key_hook.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
+/*   By: hugogoorickx <hugogoorickx@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:21:48 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/04/08 14:47:33 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/09 23:34:53 by hugogoorick      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,48 +24,21 @@ int	ft_exit(t_datas_global *all_datas)
 	return (0);
 }
 
-/*
-all_datas->player_datas->pl_delta_x = cos(all_datas->player_datas->pl_angle);
-all_datas->player_datas->pl_delta_y = sin(all_datas->player_datas->pl_angle);
-
-all_datas->player_datas->pl_angle = 3*PI/2; haut
-all_datas->player_datas->pl_angle = PI/2; bas
-all_datas->player_datas->pl_angle = PI*2; droite
-all_datas->player_datas->pl_angle = PI; gauche
-pour le nord
-float	dir_x = 0;
-float	dir_y = -1;
-
-sud
-float	dir_x = 0;
-float	dir_y = 1;
-
-ouest
-float	dir_x = -1;
-float	dir_y = 0;
-
-est
-float	dir_x = 1;
-float	dir_y = 0;
-*/
-
-void	print_all(t_datas_global *all_datas)
+void	player_3d_move(t_datas_global *data, int dir)
 {
-	int	x;
+	double	move_speed;
 
-	x = -1;
-	printf("North		-> %d\n", all_datas->map_datas->north_wall->size_x);
-	printf("East		 -> %d\n", all_datas->map_datas->east_wall->size_x);
-	printf("South		-> %d\n", all_datas->map_datas->south_wall->size_x);
-	printf("West		 -> %d\n", all_datas->map_datas->west_wall->size_x);
-	printf("Floor		-> %d\n", all_datas->map_datas->floor);
-	printf("Sky 		-> %d\n", all_datas->map_datas->sky);
-	printf("Player x	 -> %f\n", all_datas->player_datas->x);
-	printf("Player x	 -> %f\n", all_datas->player_datas->y);
-	printf("Player View  -> %f\n", all_datas->player_datas->dir_x);
-	printf("Map:\n");
-	while (++x < ft_matrixlen(all_datas->map_datas->map))
-		printf("%s\n", all_datas->map_datas->map[x]);
+	move_speed = data->player_datas->move_speed;
+	if (!dir)
+		go(data->player_datas, move_speed, data->map_datas->map);
+	else if (dir == 1)
+		back(data->player_datas, move_speed, data->map_datas->map);
+	else if (dir == 2)
+		rotate(data->player_datas, data->player_datas->rot_speed, data);
+	else if (dir == 3)
+		lat_right(data->player_datas, move_speed, data);
+	else if (dir == 4)
+		lat_left(data->player_datas, move_speed, data);
 }
 
 int	main(int argc, char **argv)
@@ -85,9 +58,9 @@ int	main(int argc, char **argv)
 		ft_print_error(ERROR_WRONG_CHAR, &all_datas);
 	else if (tmp == -2)
 		ft_print_error(ERROR_WRONG_POS, &all_datas);
-	print_all(&all_datas);
-	mlx_hook(all_datas.win_ptr, 2, 0, ft_key_hook, &all_datas);
+	mlx_hook(all_datas.win_ptr, 2, 0, ft_key_press, &all_datas);
+	mlx_hook(all_datas.win_ptr, 3, 0, ft_key_realese, &all_datas);
 	mlx_hook(all_datas.win_ptr, WINDOW_PRESS_EXIT, 0, ft_exit, &all_datas);
-	create_wall(&all_datas);
+	mlx_loop_hook(all_datas.mlx_ptr, ft_key_hook, &all_datas);
 	mlx_loop(all_datas.mlx_ptr);
 }

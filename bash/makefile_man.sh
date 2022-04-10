@@ -20,4 +20,5 @@ printf "* ${GREEN}%-20s${DEFAULT} => ${YELLOW}%-80s${DEFAULT} *\n" "re" "Do make
 printf "* ${GREEN}%-20s${DEFAULT} => ${YELLOW}%-80s${DEFAULT} *\n" "add" "Add file(s) inside the minishell's Makefile"
 printf "* ${GREEN}%-20s${DEFAULT} => ${YELLOW}%-80s${DEFAULT} *\n" "man" "Print man"
 printf "* ${GREEN}%-20s${DEFAULT} => ${YELLOW}%-80s${DEFAULT} *\n" "fclean_all" "fclean in lib and in srcs"
+printf "* ${GREEN}%-20s${DEFAULT} => ${YELLOW}%-80s${DEFAULT} *\n" "bonus" "add move mouse"
 printf "************************************************************************************************************\n"

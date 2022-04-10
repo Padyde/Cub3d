@@ -6,7 +6,7 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:22:05 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/04/08 14:11:15 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/10 15:40:56 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_num(char *string, t_datas_global *all_datas)
 
 int	check_char(char x)
 {
-	return (x != '\0' && x != ' ' && x != '0' && x != '1'
+	return (x != '\0' && x != '0' && x != '1'
 		&& x != 'N' && x != 'S' && x != 'E' && x != 'W');
 }
 
@@ -46,7 +46,7 @@ int	check_begin(char **map)
 	{
 		x = -1;
 		while (x++ < ft_strlen(map[y]))
-			if (check_char(map[y][x]))
+			if (check_char(map[y][x]) && map[y][x] != ' ')
 				return (-1);
 	}
 	return (0);

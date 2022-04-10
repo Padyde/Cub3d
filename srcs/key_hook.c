@@ -6,59 +6,69 @@
 /*   By: hugoorickx <hugoorickx@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 14:43:08 by hugoorickx        #+#    #+#             */
-/*   Updated: 2022/04/08 14:46:36 by hugoorickx       ###   ########.fr       */
+/*   Updated: 2022/04/11 00:14:28 by hugoorickx       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "all.h"
 
-int	ft_key_hook(int keycode, t_datas_global *all_datas)
+int	ft_key_press(int keycode, t_datas_global *all_datas)
 {
 	if (keycode == ESC)
 		ft_print_error(MESSAGE_END_EXIT, all_datas);
 	if (keycode == W)
-		player_3d_move(all_datas, 0);
+		all_datas->test->w = 1;
 	if (keycode == S)
-		player_3d_move(all_datas, 1);
+		all_datas->test->s = 1;
 	if (keycode == LEFT_ARROW)
-	{
-		all_datas->player_datas->rot_speed = 0.2;
-		player_3d_move(all_datas, 2);
-	}
+		all_datas->test->arrow_l = 1;
 	if (keycode == RIGHT_ARROW)
-	{
-		all_datas->player_datas->rot_speed = -0.2;
-		player_3d_move(all_datas, 2);
-	}
+		all_datas->test->arrow_r = 1;
 	if (keycode == D)
-		player_3d_move(all_datas, 3);
+		all_datas->test->d = 1;
 	if (keycode == A)
-		player_3d_move(all_datas, 4);
+		all_datas->test->a = 1;
 	return (0);
 }
 
-/*
-	dir
-		-> 0  =  avance
-		-> 1  =  recule
-		-> 2  =  tourne
-		-> 3  =  lat droite
-		-> 4  =  lat gauche
-*/
-
-void	player_3d_move(t_datas_global *data, int dir)
+int	ft_key_realese(int keycode, t_datas_global *all_datas)
 {
-	double	move_speed;
+	if (keycode == W)
+		all_datas->test->w = 0;
+	if (keycode == S)
+		all_datas->test->s = 0;
+	if (keycode == LEFT_ARROW)
+		all_datas->test->arrow_l = 0;
+	if (keycode == RIGHT_ARROW)
+		all_datas->test->arrow_r = 0;
+	if (keycode == D)
+		all_datas->test->d = 0;
+	if (keycode == A)
+		all_datas->test->a = 0;
+	return (0);
+}
 
-	move_speed = data->player_datas->move_speed;
-	if (!dir)
-		go(data->player_datas, move_speed, data->map_datas->map, data);
-	else if (dir == 1)
-		back(data->player_datas, move_speed, data->map_datas->map, data);
-	else if (dir == 2)
-		rotate(data->player_datas, data->player_datas->rot_speed, data);
-	else if (dir == 3)
-		lat_right(data->player_datas, move_speed, data);
-	else if (dir == 4)
-		lat_left(data->player_datas, move_speed, data);
+int	ft_key_hook(t_datas_global *all_datas)
+{
+	all_datas->test1++;
+	if (all_datas->test->w == 1)
+		player_3d_move(all_datas, 0);
+	if (all_datas->test->s == 1)
+		player_3d_move(all_datas, 1);
+	if (all_datas->test->arrow_l == 1)
+	{
+		all_datas->player_datas->rot_speed = 0.05;
+		player_3d_move(all_datas, 2);
+	}
+	if (all_datas->test->arrow_r == 1)
+	{
+		all_datas->player_datas->rot_speed = -0.05;
+		player_3d_move(all_datas, 2);
+	}
+	if (all_datas->test->d == 1)
+		player_3d_move(all_datas, 3);
+	if (all_datas->test->a == 1)
+		player_3d_move(all_datas, 4);
+	create_wall(all_datas);
+	return (0);
 }
