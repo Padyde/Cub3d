@@ -46,6 +46,7 @@ BONUS += key_hook_bonus.c
 BONUS += main_bonus.c
 BONUS += ray_cast_bonus.c
 BONUS += ray_cast_utils_bonus.c
+BONUS += test_mini_map.c
 
 SRC += ft_print_error.c
 SRC += free_all.c

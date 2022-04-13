@@ -177,4 +177,8 @@ double	delta(double val1, double val2);
 double	dpx(t_datas_player *val1, double val2, int val3);
 double	dpy(t_datas_player *val1, double val2, int val3, double val4);
 
+
+//test map
+void	draw_map(t_datas_global *data);
+
 #endif

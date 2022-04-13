@@ -25,7 +25,7 @@ all:  global_libft_init creat_dir print ${NAME}
 #-I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
 
 ${NAME}:	${OBJS} ${OBJS_MAIN}
-	@gcc ${CFLAGS} -I ${INCLUDES} -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit ${LIBFT} ${OBJS} ${OBJS_MAIN} -o $@
+	@gcc ${CFLAGS} -I ${INCLUDES} -lmlx -framework OpenGL -framework AppKit -lz ${LIBFT} ${OBJS} ${OBJS_MAIN} -o $@
 	@printf "${START_FIRST}${BLUE}%-30s${DEFAULT}\t\t[${GREEN} OK ${DEFAULT}]%40s\n" "Compile" ""
 
 ${OBJ_DIR}/%.o:${SRC_DIR}/%.c
@@ -33,8 +33,8 @@ ${OBJ_DIR}/%.o:${SRC_DIR}/%.c
 	@printf "${START_FIRST}${BLUE}%-30s${DEFAULT}\t\t[${GREEN}%-30s${DEFAULT}]" "cub3D" $<
 	@sleep ${FAST}
 
-bonus:		creat_dir print ${OBJS} ${OBJS_BONUS}
-	@gcc ${CFLAGS} -I ${INCLUDES} -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit ${LIBFT} ${OBJS} ${OBJS_BONUS} -o ${NAME}
+bonus:		global_libft_init creat_dir print ${OBJS} ${OBJS_BONUS}
+	@gcc ${CFLAGS} -I ${INCLUDES} -lmlx -framework OpenGL -framework AppKit -lz ${LIBFT} ${OBJS} ${OBJS_BONUS} -o ${NAME}
 	@printf "${START_FIRST}${BLUE}%-30s${DEFAULT}\t\t[${GREEN} OK ${DEFAULT}]%40s\n" "Compile" ""
 
 

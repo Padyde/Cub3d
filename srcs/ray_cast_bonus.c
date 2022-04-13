@@ -123,4 +123,5 @@ void	create_wall(t_datas_global *data)
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
 		data->display_datas->ptr, 0, 0);
+	draw_map(data);
 }
