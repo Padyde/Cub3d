@@ -24,6 +24,7 @@ typedef struct s_datas_global	t_datas_global;
 typedef struct s_ray			t_ray;
 typedef struct s_vert_line		t_vert_line;
 typedef struct s_test			t_test;
+typedef struct s_mini_map		t_mini_map;
 
 struct s_datas_player
 {
@@ -78,8 +79,8 @@ struct s_datas_map
 	t_datas_wall	*south_wall;
 	t_datas_wall	*west_wall;
 	t_datas_wall	*east_wall;
-	int				floor;
-	int				sky;
+	unsigned int	floor;
+	unsigned int	sky;
 };
 
 struct s_datas_global
@@ -138,47 +139,63 @@ struct s_vert_line
 	int				*ptr;
 };
 
-void	copy_the_other(char *params, int *val, t_datas_global *all_datas);
-void	convert_datas(int fd, t_datas_global *datas_map);
-void	free_all(t_datas_global *all_datas);
-void	malloc_all(t_datas_global *all_datas);
-void	ft_print_error(char *output, t_datas_global *all_datas);
-void	copy_the_wall(t_datas_global *all_datas, char *cp, t_datas_wall *wall);
-void	act_wall(t_datas_global *all_datas, char **mat);
-void	create_wall(t_datas_global *data);
-void	init_ray_var(t_ray *data_r, t_datas_global *data);
-void	init_line_size(t_ray *data_r, t_datas_global *data);
-void	init_tex(t_ray *data_r, t_datas_global *data);
-void	player_3d_move(t_datas_global *data, int dir);
-void	def_dirs(t_datas_player *player, int val1, int val2, int val3);
-void	go(t_datas_player *val1, double val2, char **map);
-void	back(t_datas_player *val1, double val2, char **map);
-void	rotate(t_datas_player *val1, double val2, t_datas_global *data);
-void	lat_right(t_datas_player *v1, double v2, t_datas_global *data);
-void	lat_left(t_datas_player *v1, double v2, t_datas_global *data);
-void	draw_bonus(t_datas_global *data, t_vert_line *data_v);
+struct s_mini_map
+{
+	int	j;
+	int	i;
+	int	start_j;
+	int	start_i;
+	int	x;
+	int	y;
+	int	x_add;
+	int	y_add;
+	int	color;
+};
 
-char	*get_next_line(int fd);
+unsigned int	copy_the_other(char *params, t_datas_global *all_datas);
+void			convert_datas(int fd, t_datas_global *datas_map);
+void			free_all(t_datas_global *all_datas);
+void			malloc_all(t_datas_global *all_datas);
+void			ft_print_error(char *output, t_datas_global *all_datas);
+void			copy_the_wall(t_datas_global *all_datas, char *cp, \
+	t_datas_wall *wall);
+void			act_wall(t_datas_global *all_datas, char **mat);
+void			create_wall(t_datas_global *data);
+void			init_ray_var(t_ray *data_r, t_datas_global *data);
+void			init_line_size(t_ray *data_r, t_datas_global *data);
+void			init_tex(t_ray *data_r, t_datas_global *data);
+void			player_3d_move(t_datas_global *data, int dir);
+void			def_dirs(t_datas_player *player, int val1, int val2, int val3);
+void			go(t_datas_player *val1, double val2, char **map);
+void			back(t_datas_player *val1, double val2, char **map);
+void			rotate(t_datas_player *val1, double val2, t_datas_global *data);
+void			lat_right(t_datas_player *v1, double v2, t_datas_global *data);
+void			lat_left(t_datas_player *v1, double v2, t_datas_global *data);
+void			draw_bonus(t_datas_global *data, t_vert_line *data_v);
+void			draw_map(t_datas_global *data);
+void			draw_player(t_datas_global *data);
+void			draw_ray(t_datas_global *data);
+void			init_mini_d(t_mini_map *mini_d, t_datas_global *data);
+void			init_color(t_mini_map *mini_d, t_datas_global *data);
 
-int		check_map(t_datas_global *all_datas);
-int		check_num(char *string, t_datas_global *all_datas);
-int		first_tests(char **argv, int nb_arg);
-int		give_me_wall(char *line, t_datas_global *all_datas);
+char			*get_next_line(int fd);
 
-int		ft_key_hook(t_datas_global *all_datas);
-int		ft_key_realese(int keycode, t_datas_global *all_datas);
-int		ft_key_press(int keycode, t_datas_global *all_datas);
-int		ft_mouse_move(int x, int y, t_datas_global *all_datas);
-int		ft_mouse_click(int key, int x, int y, t_datas_global *all_datas);
+int				check_map(t_datas_global *all_datas);
+int				check_num(char *string, t_datas_global *all_datas);
+int				first_tests(char **argv, int nb_arg);
+int				give_me_wall(char *line, t_datas_global *all_datas);
 
-double	wd(int val1, double val2, double val3, double val4);
-double	ray(t_datas_player *val1, int val2, double val3);
-double	delta(double val1, double val2);
-double	dpx(t_datas_player *val1, double val2, int val3);
-double	dpy(t_datas_player *val1, double val2, int val3, double val4);
+int				ft_key_hook(t_datas_global *all_datas);
+int				ft_key_realese(int keycode, t_datas_global *all_datas);
+int				ft_key_press(int keycode, t_datas_global *all_datas);
+int				ft_mouse_move(int x, int y, t_datas_global *all_datas);
+int				ft_mouse_click(int key, int x, int y, \
+	t_datas_global *all_datas);
 
-
-//test map
-void	draw_map(t_datas_global *data);
+double			wd(int val1, double val2, double val3, double val4);
+double			ray(t_datas_player *val1, int val2, double val3);
+double			delta(double val1, double val2);
+double			dpx(t_datas_player *val1, double val2, int val3);
+double			dpy(t_datas_player *val1, double val2, int val3, double val4);
 
 #endif

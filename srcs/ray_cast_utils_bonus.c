@@ -25,7 +25,7 @@ void	draw_bonus(t_datas_global *data, t_vert_line *data_v)
 		(((data_v->i - SCREEN_HEIGHT + data->sprite2->size_y) * \
 		data->sprite2->size_line) + (SCREEN_WIGHT - data_v->x - \
 		(SCREEN_WIGHT / 2) - (data->sprite2->size_x / 2)) * \
-	 	(data->sprite2->bpp / 8)));
+		(data->sprite2->bpp / 8)));
 	else if (data->test1 % 100 > 50 && data->test1 % 100 <= 75)
 		*data_v->ptr = *(unsigned int *)(data->sprite1->addr + \
 			(((data_v->i - SCREEN_HEIGHT + data->sprite1->size_y) \

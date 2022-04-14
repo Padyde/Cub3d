@@ -44,9 +44,19 @@ void	act_wall(t_datas_global *all_datas, char **mat)
 	else if (!ft_strcmp(mat[0], "WE"))
 		copy_the_wall(all_datas, mat[1], all_datas->map_datas->west_wall);
 	else if (!ft_strcmp(mat[0], "F"))
-		copy_the_other(mat[1], &all_datas->map_datas->floor, all_datas);
+	{
+		if (all_datas->map_datas->floor == UINT_MAX)
+			all_datas->map_datas->floor = copy_the_other(mat[1], all_datas);
+		else
+			ft_print_error(ERROR_MORE_COLOR, all_datas);
+	}
 	else if (!ft_strcmp(mat[0], "C"))
-		copy_the_other(mat[1], &all_datas->map_datas->sky, all_datas);
+	{
+		if (all_datas->map_datas->sky == UINT_MAX)
+			all_datas->map_datas->sky = copy_the_other(mat[1], all_datas);
+		else
+			ft_print_error(ERROR_MORE_COLOR, all_datas);
+	}
 	else
 		ft_print_error(ERROR_DATA_INV, all_datas);
 }

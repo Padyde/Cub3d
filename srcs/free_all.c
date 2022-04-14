@@ -48,5 +48,5 @@ void	free_all(t_datas_global *all_datas)
 		free(all_datas->map_datas);
 	if (all_datas->tmp)
 		free(all_datas->tmp);
-	 free_all2(all_datas);
+	free_all2(all_datas);
 }

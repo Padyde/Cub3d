@@ -78,8 +78,8 @@ void	malloc_all_3(t_datas_global *all_datas)
 void	malloc_all(t_datas_global *all_datas)
 {
 	malloc_all_2(all_datas);
-	all_datas->map_datas->sky = -1;
-	all_datas->map_datas->floor = -1;
+	all_datas->map_datas->sky = UINT_MAX;
+	all_datas->map_datas->floor = UINT_MAX;
 	all_datas->map_datas->south_wall->ptr = NULL;
 	all_datas->map_datas->east_wall->ptr = NULL;
 	all_datas->map_datas->north_wall->ptr = NULL;

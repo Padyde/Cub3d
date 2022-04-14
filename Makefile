@@ -15,6 +15,8 @@
 
 CFLAGS		=	-Wall -Wextra -Werror
 
+NB = cub3D_bonus
+
 all:  global_libft_init creat_dir print ${NAME}
 
 -include datas_makefile/manip_global_lib.mk
@@ -33,9 +35,13 @@ ${OBJ_DIR}/%.o:${SRC_DIR}/%.c
 	@printf "${START_FIRST}${BLUE}%-30s${DEFAULT}\t\t[${GREEN}%-30s${DEFAULT}]" "cub3D" $<
 	@sleep ${FAST}
 
-bonus:		global_libft_init creat_dir print ${OBJS} ${OBJS_BONUS}
-	@gcc ${CFLAGS} -I ${INCLUDES} -lmlx -framework OpenGL -framework AppKit -lz ${LIBFT} ${OBJS} ${OBJS_BONUS} -o ${NAME}
+bonus:		global_libft_init creat_dir print ${NB}
+
+${NB}:		${OBJS} ${OBJS_BONUS}
+	@gcc ${CFLAGS} -I ${INCLUDES} -lmlx -framework OpenGL -framework AppKit -lz ${LIBFT} ${OBJS} ${OBJS_BONUS} -o ${NB}
 	@printf "${START_FIRST}${BLUE}%-30s${DEFAULT}\t\t[${GREEN} OK ${DEFAULT}]%40s\n" "Compile" ""
+
+
 
 
 creat_dir:
@@ -65,3 +71,6 @@ add:
 
 man:
 	@bash ./bash/makefile_man.sh
+
+.PHONY:
+	all bonus creat_dir clean fclean re fclean_all print add man
